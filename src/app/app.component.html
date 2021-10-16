@@ -1,6 +1,8 @@
+Welcome to {{title}}
+
+{{product.productName}}
+
 <ul>
-  <li>Laptop</li>
-  <li>Keyboard</li>
-  <li>Mouse</li>
+  <li *ngFor="let product of products">{{product.productName}}</li>
 </ul>
 <router-outlet></router-outlet>
