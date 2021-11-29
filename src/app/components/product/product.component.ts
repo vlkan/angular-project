@@ -12,15 +12,14 @@ export class ProductComponent implements OnInit {
   products: Product[] = [];
   dataLoaded = false;
 
-  constructor(private productService:ProductService) {
-
+  constructor(private productService: ProductService) {
   }
 
   ngOnInit(): void {
     this.getProducts();
   }
   getProducts() { //asenkron
-    this.productService.getProducts().subscribe(response=> {
+    this.productService.getProducts().subscribe(response => {
       this.products = response.data;
       this.dataLoaded = true;
     })

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from 'src/app/services/category.service';
 import { Category } from './../../models/category';
 
 @Component({
@@ -8,11 +9,17 @@ import { Category } from './../../models/category';
 })
 export class CategoryComponent implements OnInit {
 
-  categories : Category[] = [];
+  categories: Category[] = [];
 
-  constructor() { }
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
+    this.getCategories();
   }
 
+  getCategories() { //asenkron
+    this.categoryService.getCategories().subscribe(response => {
+      this.categories = response.data;
+    })
+  }
 }
