@@ -10,6 +10,7 @@ import { Category } from './../../models/category';
 export class CategoryComponent implements OnInit {
 
   categories: Category[] = [];
+  currentCategory: Category;
 
   constructor(private categoryService: CategoryService) { }
 
@@ -21,5 +22,16 @@ export class CategoryComponent implements OnInit {
     this.categoryService.getCategories().subscribe(response => {
       this.categories = response.data;
     })
+  }
+  setCurrentCategory(category: Category) {
+    console.log(category.categoryName) //for testing
+    this.currentCategory = category;
+  }
+  getCurrentCategoryClass(category: Category) {
+    if (category == this.currentCategory) {
+      return "list-group-item active"
+    }
+    else
+      return "list-group-item"
   }
 }
