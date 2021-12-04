@@ -44,6 +44,7 @@ export class ProductComponent implements OnInit {
   }
   addToCart(product: Product) {
     console.log(product) //for test
+
     //this.toastrService.success("Added", product.productName)
   }
 }
