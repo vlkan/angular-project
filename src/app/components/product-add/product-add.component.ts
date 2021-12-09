@@ -23,4 +23,7 @@ export class ProductAddComponent implements OnInit {
       categoryId: ["", Validators.required]
     })
   }
+  add(){
+
+  }
 }
