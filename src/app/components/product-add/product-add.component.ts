@@ -17,13 +17,14 @@ export class ProductAddComponent implements OnInit {
 
   createProductAddForm(){
     this.productAddForm = this.formBuilder.group({
-      prodctName: ["", Validators.required],
+      productName: ["", Validators.required],
       unitPrice: ["", Validators.required],
       unitsInStock: ["", Validators.required],
       categoryId: ["", Validators.required]
     })
   }
   add(){
-
+    let productModel = Object.assign({}, this.productAddForm.value)
+    console.log(productModel)
   }
 }
