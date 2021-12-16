@@ -10,16 +10,16 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductAddComponent implements OnInit {
 
-  productAddForm : FormGroup;
+  productAddForm: FormGroup;
   constructor(private formBuilder: FormBuilder,
-     private productService: ProductService,
-     private toastrService:ToastrService) { }
+    private productService: ProductService,
+    private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.createProductAddForm();
   }
 
-  createProductAddForm(){
+  createProductAddForm() {
     this.productAddForm = this.formBuilder.group({
       productName: ["", Validators.required],
       unitPrice: ["", Validators.required],
@@ -27,20 +27,26 @@ export class ProductAddComponent implements OnInit {
       categoryId: ["", Validators.required]
     })
   }
-  add(){
+  add() {
 
-    if(this.productAddForm.valid){
+    if (this.productAddForm.valid) {
       let productModel = Object.assign({}, this.productAddForm.value)
-      this.productService.add(productModel).subscribe(response=>{
+      this.productService.add(productModel).subscribe(response => {
         console.log(response)
         this.toastrService.success(response.message, "Success")
-      }, responseError=>{
+      }, responseError => {
         console.log(responseError.error)
-        this.toastrService.error(responseError.error)
+        if (responseError.error.Errors.length > 0) {
+          for (let i = 0; i < responseError.error.Errors.length; i++) {
+            this.toastrService.error(responseError.error.Errors[i].ErrorMessage, "Validation Error")
+          }
+
+        }
+
       })
 
     }
-    else{
+    else {
       this.toastrService.error("Form Error", "Warning")
     }
 
