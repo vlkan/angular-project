@@ -32,8 +32,12 @@ loginForm:FormGroup;
       let loginModel = Object.assign({
 
       }, this.loginForm.value)
-      this.authService.login(loginModel).subscribe(data=>{
-        console.log(data)
+      this.authService.login(loginModel).subscribe(response=>{
+        this.toastrService.info(response.message)
+        localStorage.setItem("token", response.data.token)
+      }, responseError=>{
+        console.log(responseError)
+        this.toastrService.error(responseError.error)
       })
     }
     else
